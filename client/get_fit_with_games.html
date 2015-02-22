@@ -1,0 +1,42 @@
+<head>
+	<title>get_fit_with_games</title>
+</head>
+
+<template name="layout">
+	{{> loginButtons }}
+	<nav>
+		<ul>
+			<li><a href="{{pathFor 'home'}}">Home</a></li>
+		</ul>
+	</nav>
+	<article>
+		{{> yield}}
+	</article>
+</template>
+
+<template name="home">
+	{{#if currentUser }}
+	{{> dashboard }}
+	{{ else }}
+	{{> guest }}
+	{{ /if }}
+</template>
+
+<template name="guest">
+	<h1>Welcome to get fit with games!</h1>
+	<p>If you log in you can get a randomized exercise plan for the game you want to play.</p>
+</template>
+
+<template name="dashboard">
+	<h1>Hi, {{currentUser.username}}</h1>
+	<p>About to play a game? Select it here:</p>
+	{{> games }}
+</template>
+
+<template name="games">
+	<ul>
+	{{#each games}}
+	<li><a href={{pathFor "sessions"}}>{{ name }}</a></li>
+	{{/each}}
+	</ul>
+</template>
