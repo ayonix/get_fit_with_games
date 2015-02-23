@@ -5,13 +5,19 @@
 
 	<button>New Session</button>
 
-	<ul>
+	<div class="ui link list">
 		{{#each sessions}}
-		<li>
-			<a href={{pathFor 'session'}}>{{dateTime}}</a>
-		</li>
+			<div class="item">
+				<a href={{pathFor 'session'}}>{{dateTime}}
+					<div class="ui progress" data-percent={{progress}}>
+						<div class="bar">
+							<div class="progress"></div>
+						</div>
+					</div>
+				</a>
+			</div>
 		{{/each}}
-	</ul>
+	</div>
 </template>
 
 <template name="session">
@@ -29,7 +35,13 @@
 				{{> exercise }}
 			{{/each}}
 		</tbody>
-
+		<tr>
+			<div class="ui progress" data-percent="{{progress}}">
+				<div class="bar">
+					<div class="progress"></div>
+				</div>
+			</div>
+		</tr>
 	</table>
 </template>
 

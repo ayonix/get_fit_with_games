@@ -11,6 +11,7 @@ Meteor.methods({
 					exercise: exercise.description,
 					people: 0,
 					mult: exercise.mult,
+					count: exercise.mult*2,
 					happened: false,
 					countDone: 0,
 				};
@@ -31,6 +32,6 @@ Meteor.methods({
 		Sessions.update({_id: sessionId, "exercises.condition": exercise.condition}, {$set: {"exercises.$.countDone": countDone}});
 	},
 	updatePeople: function(sessionId, exercise, people) {
-		Sessions.update({_id: sessionId, "exercises.condition": exercise.condition}, {$set: {"exercises.$.people": people}});
+		Sessions.update({_id: sessionId, "exercises.condition": exercise.condition}, {$set: {"exercises.$.people": people, "exercises.$.count": people*exercise.mult}});
 	},
 })

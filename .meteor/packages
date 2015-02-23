@@ -13,4 +13,3 @@ accounts-twitter
 iron:router
 reactive-var
 semantic:ui-css
-semantic:ui-checkbox
