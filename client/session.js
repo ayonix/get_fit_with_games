@@ -15,12 +15,20 @@ Template.exercise.helpers({
 			return 2 * this.mult;
 		}
 	},
+	isActive: function() {
+		return (this.happened)? " active":"";
+	}
 });
+
+Template.exercise.rendered = function() {
+	$('.ui.checkbox').checkbox();
+};
 
 Template.exercise.events({
 	'change .happened': function(event, template) {
 		var sessionId = Template.parentData(1).session._id;
 		Meteor.call("markHappened", sessionId, this, event.target.checked);
+		$(template.find('tr')).toggleClass("active");
 	},
 	'change .countDone': function(event, template) {
 		var sessionId = Template.parentData(1).session._id;

@@ -15,50 +15,48 @@
 </template>
 
 <template name="session">
-	<div class="ui centered grid">
-		<h1 class="ui header">Session of: {{session.dateTime}}</h1>
+	<h1 class="ui header">Session of: {{session.dateTime}}</h1>
+	<table class="ui table">
+		<thead>
+ 			<th>Condition</th>
+			<th>Exercise</th>
+			<th>How many were there?</th>
+			<th>How many you done of it?</th>
+		</thead>
 
-		<div class="centered row">
-			<div class="four wide column">Condition</div>
-			<div class="column">Happened?</div>
-			<div class="column">Exercise</div>
-			<div class="column">How many were there?</div>
-			<div class="column">How many you done of it?</div>
-		</div>
+		<tbody>
+			{{#each session.exercises}}
+				{{> exercise }}
+			{{/each}}
+		</tbody>
 
-
-		{{#each session.exercises}}
-		{{> exercise }}
-		{{/each}}
-	</div>
+	</table>
 </template>
 
 <template name="exercise">
-	<div class="centered row">
-		<div class="four wide column">
-			{{ condition }}
-		</div>
-		<div class="column">
-			<label class="toggle">
+	<tr class="{{isActive}}">
+		<td>
+			<div class="ui toggle checkbox">
 				<input type="checkbox" class="happened" checked="{{happened}}"/>
-				<div class="track">
-					<div class="handle"></div>
-				</div>
-			</label>
-		</div>
-		<div class="column">
+				<label>{{ condition }}</label>
+			</div>
+		</td>
+
+		<td>
 			{{ exercise }}
-		</div>
-		<div class="column">
+		</td>
+
+		<td>
 			<div class="ui input">
 				<input type="number" class="people" min="0" step="0" value="{{people}}"/>
 			</div>
-		</div>
-		<div class="column">
+		</td>
+
+		<td>
 			<div class="ui right labeled input">
 				<input type="number" class="countDone" min="0" step="1" value="{{countDone}}"/>
 				<div class="ui label">/{{count}}</div>
 			</div>
-		</div>
-	</div>
+		</td>
+	</tr>
 </template>

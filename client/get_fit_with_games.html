@@ -4,9 +4,9 @@
 
 <template name="layout">
 	{{> nav }}
-
+	<div class="main container">
 		{{> yield}}
-
+	</div>
 </template>
 
 <template name="nav">
@@ -20,10 +20,10 @@
 
 <template name="home">
 	{{#if currentUser }}
-	{{> dashboard }}
-	{{ else }}
-	{{> guest }}
-	{{ /if }}
+		{{> dashboard }}
+	{{else}}
+		{{> guest }}
+	{{/if }}
 </template>
 
 <template name="guest">
@@ -35,18 +35,17 @@
 <template name="dashboard">
 	<h1 class="ui header">Hi, {{currentUser.username}}</h1>
 
-	<div class="ui message">
-		<div class="header">
-			<p>About to play a game? Select it here:</p>
-		</div>
+	<div class="ui segment">
+		<p>About to play a game? Select it here:</p>
+
 		{{> games }}
 	</div>
 </template>
 
 <template name="games">
-	<ul>
+	<div class="ui link list">
 	{{#each games}}
-	<li><a href={{pathFor "sessions"}}>{{ name }}</a></li>
+		<a href={{pathFor "sessions"}} class="item">{{ name }}</a>
 	{{/each}}
-	</ul>
+	</div>
 </template>
