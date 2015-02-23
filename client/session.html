@@ -1,5 +1,7 @@
 <template name="sessions">
-	<h1>{{game.name}}</h1>
+	<div class="bar bar-header bar-stable">
+		<h1 class="title">{{game.name}}</h1>
+	</div>
 
 	<button>New Session</button>
 
@@ -13,40 +15,50 @@
 </template>
 
 <template name="session">
-	Session of: {{session.dateTime}}
+	<div class="ui centered grid">
+		<h1 class="ui header">Session of: {{session.dateTime}}</h1>
 
-	<table>
-		<thead>
-			<tr>
-				<th>Condition</th>
-				<th>Exercise</th>
-				<th>Has it happened?</th>
-				<th>How many were there?</th>
-				<th>How many you done of it?</th>
-			</tr>
-		</thead>
+		<div class="centered row">
+			<div class="four wide column">Condition</div>
+			<div class="column">Happened?</div>
+			<div class="column">Exercise</div>
+			<div class="column">How many were there?</div>
+			<div class="column">How many you done of it?</div>
+		</div>
+
+
 		{{#each session.exercises}}
 		{{> exercise }}
 		{{/each}}
-	</table>
+	</div>
 </template>
 
 <template name="exercise">
-			<tr>
-			<td>
-				{{ condition }}
-			</td>
-			<td>
-				{{ exercise }}
-			</td>
-			<td>
+	<div class="centered row">
+		<div class="four wide column">
+			{{ condition }}
+		</div>
+		<div class="column">
+			<label class="toggle">
 				<input type="checkbox" class="happened" checked="{{happened}}"/>
-			</td>
-			<td>
+				<div class="track">
+					<div class="handle"></div>
+				</div>
+			</label>
+		</div>
+		<div class="column">
+			{{ exercise }}
+		</div>
+		<div class="column">
+			<div class="ui input">
 				<input type="number" class="people" min="0" step="0" value="{{people}}"/>
-			</td>
-			<td>
-				<input type="number" class="countDone" min="0" step="1" value="{{countDone}}"/>/{{count}}
-			</td>
-	</tr>
+			</div>
+		</div>
+		<div class="column">
+			<div class="ui right labeled input">
+				<input type="number" class="countDone" min="0" step="1" value="{{countDone}}"/>
+				<div class="ui label">/{{count}}</div>
+			</div>
+		</div>
+	</div>
 </template>

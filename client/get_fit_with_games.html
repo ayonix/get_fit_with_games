@@ -3,15 +3,19 @@
 </head>
 
 <template name="layout">
-	{{> loginButtons }}
-	<nav>
-		<ul>
-			<li><a href="{{pathFor 'home'}}">Home</a></li>
-		</ul>
-	</nav>
-	<article>
+	{{> nav }}
+
 		{{> yield}}
-	</article>
+
+</template>
+
+<template name="nav">
+	<div class="ui menu">
+		<a class="item" href={{pathFor "home"}}>Home</a>
+		<div class="item">
+			{{> loginButtons }}
+		</div>
+	</div>
 </template>
 
 <template name="home">
@@ -23,14 +27,20 @@
 </template>
 
 <template name="guest">
-	<h1>Welcome to get fit with games!</h1>
+    <h1 class="ui header">Welcome to get fit with games!</h1>
+
 	<p>If you log in you can get a randomized exercise plan for the game you want to play.</p>
 </template>
 
 <template name="dashboard">
-	<h1>Hi, {{currentUser.username}}</h1>
-	<p>About to play a game? Select it here:</p>
-	{{> games }}
+	<h1 class="ui header">Hi, {{currentUser.username}}</h1>
+
+	<div class="ui message">
+		<div class="header">
+			<p>About to play a game? Select it here:</p>
+		</div>
+		{{> games }}
+	</div>
 </template>
 
 <template name="games">
