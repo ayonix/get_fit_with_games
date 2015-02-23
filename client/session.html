@@ -7,16 +7,20 @@
 
 	<div class="ui link list">
 		{{#each sessions}}
-			<div class="item">
-				<a href={{pathFor 'session'}}>{{dateTime}}
-					<div class="ui progress" data-percent={{progress}}>
-						<div class="bar">
-							<div class="progress"></div>
-						</div>
-					</div>
-				</a>
-			</div>
+		{{> sessionItem }}
 		{{/each}}
+	</div>
+</template>
+
+<template name="sessionItem">
+	<div class="item">
+		<a href={{pathFor 'session'}}>{{dateTime}}
+			<div class="ui progress" data-percent={{progress}}>
+				<div class="bar">
+					<div class="progress"></div>
+				</div>
+			</div>
+		</a>
 	</div>
 </template>
 

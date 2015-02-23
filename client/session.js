@@ -1,26 +1,19 @@
-Template.sessions.helpers({
+Template.sessionItem.helpers({
 	progress: function() {
-		var session = Sessions.findOne(this._id);
-		var p = new ReactiveVar(0);
-		var open = 0;
-		var done = 0;
-		_.each(session.exercises, function(ex) {
-			if (ex.happened) {
-				open += +ex.count;
-				done += +ex.countDone;
-			}
-		});
-		if (done == 0) {
-			p.set(0);
-		} else {
-			p.set(done/open * 100);
-		}
-		return p.get();
+		return Template.instance().progress.get();
 	},
 });
 
-Template.sessions.rendered = function() {
+Template.sessionItem.rendered = function() {
 	$('.ui.progress').progress();
+};
+
+Template.sessionItem.created = function() {
+	Template.instance().progress = new ReactiveVar();
+
+	this.autorun(function() {
+		updateProgress(Template.instance(), Template.instance().data);
+	});
 };
 
 Template.sessions.events({
@@ -31,7 +24,10 @@ Template.sessions.events({
 
 Template.session.created = function() {
 	Template.instance().progress = new ReactiveVar();
-	updateProgress(Template.instance());
+
+	this.autorun(function() {
+		updateProgress(Template.instance(), Template.instance().data.session);
+	});
 };
 
 Template.session.helpers({
@@ -40,9 +36,9 @@ Template.session.helpers({
 	},
 });
 
-var updateProgress = function(template) {
-	var done = _.reduce(template.data.session.exercises, function(memo, ex) { return (ex.happened) ? memo += +ex.countDone : memo; }, 0);
-	var open = _.reduce(template.data.session.exercises, function(memo, ex) { return (ex.happened) ? memo += +ex.count : memo; }, 0);
+var updateProgress = function(template, session) {
+	var done = _.reduce(session.exercises, function(memo, ex) { return (ex.happened) ? memo += +ex.countDone : memo; }, 0);
+	var open = _.reduce(session.exercises, function(memo, ex) { return (ex.happened) ? memo += +ex.count : memo; }, 0);
 	template.progress.set(done/open*100);
 	$('.ui.progress').progress({percent: template.progress.get()});
 }
@@ -51,18 +47,14 @@ Template.session.events({
 	'change .happened': function(event, template) {
 		var sessionId = Template.parentData(1).session._id;
 		Meteor.call("markHappened", sessionId, this, event.target.checked);
-		updateProgress(template);
 	},
 	'change .countDone': function(event, template) {
 		var sessionId = Template.parentData(1).session._id;
 		Meteor.call("updateCountDone", sessionId, this, event.target.value);
-		updateProgress(template);
-
 	},
 	'change .people': function(event, template) {
 		var sessionId = Template.parentData(1).session._id;
 		Meteor.call("updatePeople", sessionId, this, event.target.value);
-		updateProgress(template);
 	}
 
 });
@@ -80,6 +72,3 @@ Template.exercise.helpers({
 Template.exercise.rendered = function() {
 	$('.ui.checkbox').checkbox();
 };
-
-Template.exercise.events({
-});
