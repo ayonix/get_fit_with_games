@@ -1,13 +1,17 @@
 <template name="sessions">
-	<div class="bar bar-header bar-stable">
-		<h1 class="title">{{game.name}}</h1>
-	</div>
-
-	<button>New Session</button>
+	<h1 class="title">
+		<div class="content">
+			{{game.name}}
+			<div class="ui labeled icon button" id="createSession">
+				<i class="add square icon"></i>
+				New Session
+			</div>
+		</div>
+	</h1>
 
 	<div class="ui link list">
 		{{#each sessions}}
-		{{> sessionItem }}
+			{{> sessionItem }}
 		{{/each}}
 	</div>
 </template>
@@ -31,7 +35,7 @@
  			<th>Condition</th>
 			<th>Exercise</th>
 			<th>How many were there?</th>
-			<th>How many you done of it?</th>
+			<th>How many have you done of it?</th>
 		</thead>
 
 		<tbody>
@@ -39,13 +43,17 @@
 				{{> exercise }}
 			{{/each}}
 		</tbody>
-		<tr>
-			<div class="ui progress" data-percent="{{progress}}">
-				<div class="bar">
-					<div class="progress"></div>
-				</div>
-			</div>
-		</tr>
+		<tfoot>
+			<tr>
+				<th colspan="4">
+					<div class="ui progress" data-percent="{{progress}}">
+						<div class="bar">
+							<div class="progress"></div>
+						</div>
+					</div>
+				</th>
+			</tr>
+		</tfoot>
 	</table>
 </template>
 

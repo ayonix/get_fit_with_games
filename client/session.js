@@ -17,7 +17,7 @@ Template.sessionItem.created = function() {
 };
 
 Template.sessions.events({
-	'click button': function(event, template) {
+	'click #createSession': function(event, template) {
 		Meteor.call("createSession", this.game._id);
 	},
 });
