@@ -2,7 +2,7 @@ Meteor.methods({
 	createSession: function(gameId) {
 		if (this.userId) {
 			var game = Games.findOne(gameId);
-			var availableExercises = Exercises.find().fetch();
+			var availableExercises = _.shuffle(Exercises.find().fetch());
 			var exercises = [];
 			_.each(game.conditions, function(cond, index) {
 				var exercise = availableExercises[index];
