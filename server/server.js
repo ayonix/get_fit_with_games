@@ -3,25 +3,25 @@ Meteor.startup(function () {
 		Games.insert({
 			name: "Dota 2",
 			conditions: [
-				"Game lost",
-				"Non-english speaking in team",
-				"GG called after first blood",
-				"Report XXX",
-				"5 carry team",
-				"no wards or no courier",
-				"Pudge/Riki instant locked"
+				{description: "Game lost", dynamic: false},
+				{description: "Non-english speaking in team", dynamic: true},
+				{description: "GG called after first blood", dynamic: false},
+				{description: "Report XXX", dynamic: true},
+				{description: "5 carry team", dynamic: false},
+				{description: "no wards or no courier", dynamic: false},
+				{description: "Pudge/Riki instant locked", dynamic: false}
 			]
 		});
 		Games.insert({
 			name: "Counter-Strike: Global Offensive",
 			conditions: [
-				"Game lost",
-				"Non-english speaking in team",
-				"GG called after first round",
-				"Report XXX",
-				"5 AWPs on team",
-				"Ninja defuses",
-				"Shitty microphone",
+				{description: "Game lost", dynamic: false},
+				{description: "Non-english speaking in team", dynamic: true},
+				{description: "GG called after first round", dynamic: false},
+				{description: "Report XXX", dynamic: true},
+				{description: "5 AWPs on team", dynamic: false},
+				{description: "Ninja defuses", dynamic: false},
+				{description: "Shitty microphone", dynamic: true}
 			]
 		});
 	}

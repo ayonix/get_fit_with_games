@@ -7,7 +7,8 @@ Meteor.methods({
 			_.each(game.conditions, function(cond, index) {
 				var exercise = availableExercises[index];
 				exercises[index] = {
-					condition: cond,
+					condition: cond.description,
+					dynamic: cond.dynamic,
 					exercise: exercise.description,
 					people: 0,
 					mult: exercise.mult,
