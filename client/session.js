@@ -40,7 +40,7 @@ var updateProgress = function(template, session) {
 	var done = _.reduce(session.exercises, function(memo, ex) { return (ex.happened) ? memo += +ex.countDone : memo; }, 0);
 	var open = _.reduce(session.exercises, function(memo, ex) { return (ex.happened) ? memo += +ex.count : memo; }, 0);
 	template.progress.set(done/open*100);
-	$('.ui.progress').progress({percent: template.progress.get()});
+	$('#'+session._id).progress({percent: template.progress.get()});
 }
 
 Template.session.events({
