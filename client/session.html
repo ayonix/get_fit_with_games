@@ -1,13 +1,14 @@
 <template name="sessions">
-	<h1 class="title">
+	<h1 class="ui dividing header">
 		<div class="content">
 			{{game.name}}
-			<div class="ui labeled icon button" id="createSession">
-				<i class="add square icon"></i>
-				New Session
-			</div>
 		</div>
 	</h1>
+
+	<div class="ui labeled icon button" id="createSession">
+		<i class="add square icon"></i>
+		New Session
+	</div>
 
 	<div class="ui link list">
 		{{#each sessions}}
@@ -29,7 +30,7 @@
 </template>
 
 <template name="session">
-	<h1 class="ui header">Session of: {{session.dateTime}}</h1>
+	<h1 class="ui dividing header">Session of: {{session.dateTime}}</h1>
 	<table class="ui table">
 		<thead>
  			<th>Condition</th>
@@ -80,7 +81,7 @@
 
 		<td>
 			<div class="ui right labeled input">
-				<input type="number" class="countDone" min="0" step="1" value="{{countDone}}"/>
+				<input type="number" class="countDone" min="0" step="1" max="{{count}}" value="{{countDone}}"/>
 				<div class="ui label">/{{count}}</div>
 			</div>
 		</td>
