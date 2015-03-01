@@ -3,12 +3,17 @@
 </head>
 
 <template name="layout">
-	<div class="ui centered page stackable grid">
-		<div class="fourteen wide column">
+	<div class="ui page stackable grid">
+		<div class="row">
 			{{> nav }}
+		</div>
+
+		<div class="row">
+		<div class="ui column">
 			<div class="ui segment main container">
 				{{> yield}}
 			</div>
+		</div>
 		</div>
 	</div>
 </template>
