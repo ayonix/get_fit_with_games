@@ -1,1 +1,9 @@
 /* CSS declarations go here */
+.keyboard {
+	max-height: 100%;
+	max-width: 100%;
+}
+
+#headerimage {
+	height: 120px;
+}

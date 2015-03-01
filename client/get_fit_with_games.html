@@ -4,7 +4,6 @@
 
 <template name="layout">
 	<div class="ui centered page stackable grid">
-		<div id="headerimage"></div>
 		<div class="fourteen wide column">
 			{{> nav }}
 			<div class="ui segment main container">
@@ -15,9 +14,12 @@
 </template>
 
 <template name="nav">
-	<div class="ui menu">
+	<div class="ui borderless fluid three item menu">
 		<a class="item" href={{pathFor "home"}}>Home</a>
-		<div class="item">
+		<div class="fitted item">
+			<div id="headerimage"></div>
+		</div>
+		<div class="link item">
 			{{> loginButtons }}
 		</div>
 	</div>

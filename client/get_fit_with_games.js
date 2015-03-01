@@ -2,14 +2,11 @@ Template.games.helpers({
 	games: Games.find(),
 });
 Template.layout.rendered = function() {
-	//console.log(document.getElementById("headerimage"))
 	var s = Snap("#headerimage");
 	Snap.load("/img/kbd.svg", function (f) {
-		//f.select("polygon[fill='#09B39C']").attr({fill: "#bada55"});
-		//var g = f.select("g");
 		s.append(f);
+		s.select('svg').addClass("keyboard ui image");
 	});
-
 
 	var keycode_mappings = (function() {
 		var k = {};
