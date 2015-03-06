@@ -1,7 +1,7 @@
 Template.sessionItem.helpers({
 	progress: function() {
 		return Template.instance().progress.get();
-	},
+	}
 });
 
 Template.sessionItem.rendered = function() {
@@ -19,7 +19,7 @@ Template.sessionItem.created = function() {
 Template.sessions.events({
 	'click #createSession': function(event, template) {
 		Meteor.call("createSession", this.game._id);
-	},
+	}
 });
 
 Template.session.created = function() {
@@ -33,7 +33,7 @@ Template.session.created = function() {
 Template.session.helpers({
 	progress: function() {
 		return Template.instance().progress.get();
-	},
+	}
 });
 
 var updateProgress = function(template, session) {
@@ -56,7 +56,6 @@ Template.session.events({
 		var sessionId = Template.parentData(1).session._id;
 		Meteor.call("updatePeople", sessionId, this, event.target.value);
 	}
-
 });
 
 Template.session.rendered = function() {

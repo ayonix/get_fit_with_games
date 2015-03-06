@@ -9,11 +9,11 @@
 		</div>
 
 		<div class="row">
-		<div class="ui column">
-			<div class="ui segment main container">
-				{{> yield}}
+			<div class="ui column">
+				<div class="ui segment main container">
+					{{> yield}}
+				</div>
 			</div>
-		</div>
 		</div>
 	</div>
 </template>
@@ -52,6 +52,24 @@
 
 		{{> games }}
 	</div>
+	<div class="ui segment">
+		<h3 class="ui header">You still have to do these</h3>
+		<table class="ui table">
+			<thead>
+				<tr>
+					<th>Exercise</th>
+					<th>Done/Total</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#each sessions}}
+					{{#each exercises}}
+						{{> todo_exercise }}
+					{{/each}}
+				{{/each}}
+			</tbody>
+		</table>
+	</div>
 </template>
 
 <template name="games">
@@ -60,4 +78,16 @@
 		<a href={{pathFor "sessions"}} class="item">{{ name }}</a>
 	{{/each}}
 	</div>
+</template>
+
+<template name="todo_exercise">
+	<tr>
+		<td>{{exercise}}</td>
+		<td>
+			<div class="ui right labeled input">
+				<input type="number" value="{{countDone}}" class="countDone" min="0" step="1" max="{{count}}" />
+				<div class="ui label">/{{count}}</div>
+			</div>
+		</td>
+	</tr>
 </template>

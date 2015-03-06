@@ -13,3 +13,15 @@ Meteor.publish('sessionsForGame', function(gameId) {
 Meteor.publish('session', function(sessionId) {
 	return Sessions.find({_id: sessionId, userId: this.userId});
 });
+
+Meteor.publish('todo', function() {
+	return Sessions.find(
+		{userId: this.userId, 'exercises.happened': true},
+		{
+			fields: {
+				'exercises': 1,
+				'_id': 1
+			}
+		}
+	);
+});
