@@ -56,21 +56,25 @@
 	</div>
 	<div class="ui segment">
 		<h3 class="ui header">You still have to do these</h3>
-		<table class="ui table">
-			<thead>
-				<tr>
-					<th>Exercise</th>
-					<th>Done/Total</th>
-				</tr>
-			</thead>
-			<tbody>
-				{{#each sessions}}
-					{{#each exercises}}
-						{{> todo_exercise }}
+		{{# if sessions}}
+			<table class="ui table">
+				<thead>
+					<tr>
+						<th>Exercise</th>
+						<th>Done/Total</th>
+					</tr>
+				</thead>
+				<tbody>
+					{{#each sessions}}
+						{{#each exercises}}
+							{{> todo_exercise }}
+						{{/each}}
 					{{/each}}
-				{{/each}}
-			</tbody>
-		</table>
+				</tbody>
+			</table>
+		{{else}}
+			<p>Nothing left to do</p>
+		{{/if}}
 	</div>
 </template>
 

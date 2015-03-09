@@ -56,6 +56,9 @@ Template.dashboard.helpers({
 		_.each(sess, function(s) {
 			s.exercises = _.filter(s.exercises, function(x) { return x.happened && x.countDone < x.count; });
 		});
+		sess = _.reject(sess, function(s) {
+			return s.exercises.length == 0;
+		});
 		return sess;
 	}
 });
