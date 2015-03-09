@@ -18,7 +18,9 @@ Template.sessionItem.created = function() {
 
 Template.sessions.events({
 	'click #createSession': function(event, template) {
-		Meteor.call("createSession", this.game._id);
+		Meteor.call("createSession", this.game._id, function(err, id) {
+			Router.go('session', {_id: id});
+		});
 	}
 });
 

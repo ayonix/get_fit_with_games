@@ -1,5 +1,6 @@
 Meteor.methods({
 	createSession: function(gameId) {
+		var sess;
 		if (this.userId) {
 			var game = Games.findOne(gameId);
 			var availableExercises = _.shuffle(Exercises.find().fetch());
@@ -14,17 +15,18 @@ Meteor.methods({
 					mult: exercise.mult,
 					count: exercise.mult*2,
 					happened: false,
-					countDone: 0,
+					countDone: 0
 				};
 			});
 
-			Sessions.insert({
+			sess = Sessions.insert({
 				gameId: gameId,
 				userId: this.userId,
 				dateTime: new Date(),
-				exercises: exercises,
+				exercises: exercises
 			});
 		}
+		return sess;
 	},
 	markHappened: function(sessionId, exercise, checked) {
 		Sessions.update({_id: sessionId, "exercises.condition": exercise.condition}, {$set: {"exercises.$.happened": checked}});
