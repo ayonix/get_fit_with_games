@@ -50,7 +50,7 @@ Template.todo_exercise.events({
 	}
 });
 
-Template.dashboard.helpers({
+Template.todo.helpers({
 	sessions: function() {
 		var sess = Sessions.find().fetch();
 		_.each(sess, function(s) {
@@ -62,3 +62,16 @@ Template.dashboard.helpers({
 		return sess;
 	}
 });
+
+Template.todo.rendered = function() {
+	this.find('tbody')._uihooks = {
+		insertElement: function(node, next) {
+			$(node).hide().insertBefore(next);//.fadeIn(5000);
+		},
+		removeElement: function(node) {
+			$(node).fadeOut(function() {
+				this.remove();
+			});
+		}
+	};
+};
